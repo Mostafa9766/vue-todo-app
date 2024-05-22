@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: application-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - name: my-app-container
+          image: mostafaahmed97/task-todo-app:lts
+          ports:
+            - name: app-port
+              containerPort: 80
+      imagePullSecrets:
+      - name: secret/my-docker-secret
