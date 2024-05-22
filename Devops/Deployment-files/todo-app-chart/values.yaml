@@ -1,0 +1,10 @@
+replicaCount: 1
+image:
+  repository: mostafaahmed97/task-todo-app:lts
+  tag: lts
+  pullSecret: my-docker-secret
+containerPort: 80
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 80
