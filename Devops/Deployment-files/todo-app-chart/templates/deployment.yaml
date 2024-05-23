@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "todo-app-chart.fullname" . }}
+  name: {{ include "todo-app-chart.name" . }}
   labels:
     app: {{ include "todo-app-chart.name" . }}
 spec:
