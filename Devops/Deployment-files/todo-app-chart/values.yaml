@@ -5,6 +5,23 @@ image:
   pullSecret: my-docker-secret
 containerPort: 80
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
   targetPort: 80
+##ingress
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - host: "a39b292a4eb484edf863fb5b34e727be-778808408.us-east-1.elb.amazonaws.com"
+      paths:
+        - path: /crud
+          pathType: ImplementationSpecific
+          backend:
+            serviceName: crud-app-1-crud-app-chart
+            servicePort: 80
+        - path: /todo
+          pathType: ImplementationSpecific
+          backend:
+            serviceName: todo-app-chart
+            servicePort: 80

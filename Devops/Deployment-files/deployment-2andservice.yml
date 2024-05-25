@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo
+  template:
+    metadata:
+      labels:
+        app: todo
+    spec:
+      containers:
+      - name: crud-container
+        image: mostafaahmed97/task-todo-app:lts
+        ports:
+         - name: app-port
+           containerPort: 80
+      imagePullSecrets:
+      - name: secret/regsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-svc
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: todo

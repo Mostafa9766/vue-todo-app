@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crud
+  template:
+    metadata:
+      labels:
+        app: crud
+    spec:
+      containers:
+      - name: crud-container
+        image: mostafaahmed97/task-crud-app:latest
+        ports:
+         - name: app-port
+           containerPort: 80
+      imagePullSecrets:
+      - name: secret/regsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crud-svc
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: crud
